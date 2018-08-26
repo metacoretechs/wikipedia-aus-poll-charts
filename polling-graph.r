@@ -21,7 +21,7 @@ primary_votes <- ggplot(polling1619, aes(x=as.Date(last_date, '%d %b %Y'))) +
                      values = c("LNP"="blue4", "ALP"="red3", "GRN"="green4", "ONP"="yellow3", "OTH"="gray60"))
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
 
-primary_votes <- ggplot(polling1619, aes(x=as.Date(last_date, '%d %b %Y'))) +
+tpp <- ggplot(polling1619, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=(tpp_lnp)), colour="blue4", size=2, alpha = 3/10) +
   geom_smooth(aes(y=(tpp_lnp), colour="LNP"), span = 0.2, se = FALSE) +
@@ -34,4 +34,4 @@ primary_votes <- ggplot(polling1619, aes(x=as.Date(last_date, '%d %b %Y'))) +
   scale_color_manual(name="", 
                      labels = c("Australian Labor Party", "Liberal-National Coalition"), 
                      values = c("LNP"="blue4", "ALP"="red3"))
-primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
+tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))

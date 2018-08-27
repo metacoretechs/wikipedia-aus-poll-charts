@@ -18,4 +18,4 @@ The script is written in the R programming language. To generate the charts, you
 3. Open polling-graph.r in RStudio, and adjust the read.csv function to point to "polling1619.csv".
 4. Select all the code in polling-graph.r and press the Run button.
 5. The primary vote and two-party-preferred charts will generate in the Plots tab. You can export these to your desired size by pressing Export > Save as image... The PNG export in RStudio isn't great, and vector images are generally preferred on Wikimedia Commons, so export as a 1200 x 800 SVG image.
-6. Upload the resulting PNG image files to Wikimedia Commons
+6. Upload the resulting SVG or PNG image files to Wikimedia Commons

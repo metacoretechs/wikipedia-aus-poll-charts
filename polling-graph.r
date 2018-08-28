@@ -1,5 +1,6 @@
 library(ggplot2)
-polling1619 <- read.csv("~/Documents/GitHub/wikipedia-aus-poll-charts/polling1619.csv")
+setwd("~/Documents/GitHub/wikipedia-aus-poll-charts")
+polling1619 <- read.csv("polling1619.csv")
 primary_votes <- ggplot(polling1619, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=(pv_lnp)), colour="blue4", size=2, alpha = 3/10) +

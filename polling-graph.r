@@ -1,7 +1,7 @@
 library(ggplot2)
 setwd("~/Documents/GitHub/wikipedia-aus-poll-charts")
 polling1922 <- read.csv("polling1922.csv")
-spansize <- 0.4
+spansize <- 0.3
 primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=(pv_lnp)), colour="blue4", size=2, alpha = 3/10) +

@@ -1,7 +1,27 @@
 library(ggplot2)
-setwd("~/Documents/GitHub/wikipedia-aus-poll-charts")
+library(dplyr)
+setwd("~/Documents/GitHub/wikipedia-aus-poll-charts") # replace with your own working directory
 polling1922 <- read.csv("polling1922.csv")
+essential <- read.csv("essential_polling1922.csv")
 spansize <- 0.4
+
+# Process Essential undecided to allocate on % vote ratio, join to other table
+essential <- essential %>%
+  mutate(pv_total = pv_lnp_raw + pv_alp_raw + pv_grn_raw + pv_onp_raw + pv_oth_raw,
+         tpp_total = tpp_lnp_raw + tpp_alp_raw,
+         pv_lnp = pv_lnp_raw+(undec*pv_lnp_raw/pv_total),
+         pv_alp = pv_alp_raw+(undec*pv_alp_raw/pv_total),
+         pv_grn = pv_grn_raw+(undec*pv_grn_raw/pv_total),
+         pv_onp = pv_onp_raw+(undec*pv_onp_raw/pv_total),
+         pv_oth = pv_oth_raw+(undec*pv_oth_raw/pv_total),
+         tpp_lnp = tpp_lnp_raw+(undec*tpp_lnp_raw/tpp_total),
+         tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) %>%
+  select(Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_oth,tpp_lnp,tpp_alp)
+
+polling1922 <- polling1922 %>%
+  bind_rows(essential) %>%
+  arrange(desc(as.Date(last_date, '%d %b %Y')))
+
 primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=pv_lnp), colour="blue4", size=2, alpha = 3/10) +

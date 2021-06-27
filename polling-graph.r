@@ -40,7 +40,7 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   labs(y="Voters (%)", x= NULL) +
   scale_color_manual(name="", 
                      labels = c("ALP", "Greens", "Liberal-National Coalition", "One Nation", "Other"), 
-                     values = c("LNP"="blue4", "ALP"="red3", "GRN"="green4", "ONP"="yellow3", "OTH"="gray60"))
+                     values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="yellow3", "OTH"="gray60"))
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
 
 tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
@@ -55,5 +55,5 @@ tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   labs(y="Voters (%)", x= NULL) +
   scale_color_manual(name="", 
                      labels = c("Australian Labor Party", "Liberal-National Coalition"), 
-                     values = c("LNP"="blue4", "ALP"="red3"))
+                     values = c("ALP"="red3", "LNP"="blue4"))
 tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))

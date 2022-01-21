@@ -1,6 +1,6 @@
 Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_oth,tpp_lnp,tpp_alp
 4–16 Jan 2022,16 Jan 2022,Morgan,34.5,37,12,3,13.5,44,56
-11–15 Jan 2022,15 Jan 2022,Resolve,34,35,11,3,7,,
+11–15 Jan 2022,15 Jan 2022,Resolve,34,35,11,3,17,,
 27 Nov–5 Dec 2021,5 Dec 2021,Morgan,34.5,36,12.5,3.5,13.5,43.5,56.5
 1–4 Dec 2021,4 Dec 2021,Newspoll,36,38,10,3,13,47,53
 13–21 Nov 2021,21 Nov 2021,Morgan,35.5,35.5,12,3.5,13.5,44.5,55.5
@@ -11,6 +11,7 @@ Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_oth,tpp_lnp,tpp_alp
 2-10 Oct 2021,10 Oct 2021,Morgan,37.5,36,11.5,3,12,47,53
 29 Sep-2 Oct 2021,2 Oct 2021,Newspoll,37,37,11,2,13,47,53
 18–26 Sep 2021,26 Sep 2021,Morgan,36,36,12.5,3.5,12,46,54
+15–19 Sep 2021,19 Sep 2021,Resolve,39,31,10,4,16,,
 15–18 Sep 2021,18 Sep 2021,Newspoll,37,38,10,3,12,47,53
 4–12 Sep 2021, 12 Sep 2021,Morgan,39.5,35,13,3,10,47.5,52.5
 21–29 Aug 2021,29 Aug 2021,Morgan,37.5,38.5,11.5,3,9.5,45.5,54.5

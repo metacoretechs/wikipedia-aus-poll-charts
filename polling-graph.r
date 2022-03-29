@@ -10,16 +10,17 @@ spansize <- 0.4
 
 # Process Essential undecided to allocate on % vote ratio, join to other table
 essential <- essential %>%
-  mutate(pv_total = pv_lnp_raw + pv_alp_raw + pv_grn_raw + pv_onp_raw + pv_oth_raw,
+  mutate(pv_total = pv_lnp_raw + pv_alp_raw + pv_grn_raw + pv_onp_raw + pv_uap_raw + pv_oth_raw,
          tpp_total = tpp_lnp_raw + tpp_alp_raw,
          pv_lnp = pv_lnp_raw+(undec*pv_lnp_raw/pv_total),
          pv_alp = pv_alp_raw+(undec*pv_alp_raw/pv_total),
          pv_grn = pv_grn_raw+(undec*pv_grn_raw/pv_total),
          pv_onp = pv_onp_raw+(undec*pv_onp_raw/pv_total),
+         pv_uap = pv_uap_raw+(undec*pv_uap_raw/pv_total),
          pv_oth = pv_oth_raw+(undec*pv_oth_raw/pv_total),
          tpp_lnp = tpp_lnp_raw+(undec*tpp_lnp_raw/tpp_total),
          tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) %>%
-  select(Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_oth,tpp_lnp,tpp_alp)
+  select(Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp)
 
 polling1922 <- polling1922 %>%
   bind_rows(essential) %>%
@@ -33,8 +34,10 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=pv_alp, colour="ALP"), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_grn), colour="green4", size=2, alpha = 3/10) +
   geom_smooth(aes(y=pv_grn, colour="GRN"), span = spansize, se = FALSE) +
-  geom_point(aes(y=pv_onp), colour="yellow3", size=2, alpha = 5/10) +
+  geom_point(aes(y=pv_onp), colour="orange3", size=2, alpha = 5/10) +
   geom_smooth(aes(y=pv_onp, colour="ONP"), span = spansize, se = FALSE) +
+  geom_point(aes(y=pv_uap), colour="yellow3", size=2, alpha = 5/10) +
+  geom_smooth(aes(y=pv_uap, colour="UAP"), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_oth), colour="gray60", size=2, alpha = 3/10) +
   geom_smooth(aes(y=pv_oth, colour="OTH"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
@@ -42,8 +45,8 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
-                     labels = c("ALP", "Greens", "Liberal-National Coalition", "One Nation", "Other"), 
-                     values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="yellow3", "OTH"="gray60"))
+                     labels = c("ALP", "Greens", "Liberal-National Coalition", "One Nation", "United Australia", "Other"), 
+                     values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "UAP"="yellow3", "OTH"="gray60"))
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
 
 tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +

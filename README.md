@@ -10,7 +10,7 @@ The script is written in the R programming language. To generate the charts, you
 ## Updating the polling data
 1. I used [OpenRefine](http://openrefine.org) to clean up the Wikitable of polling data from [the "Next Australian federal election" Wikipedia article](https://en.wikipedia.org/wiki/Next_Australian_federal_election#Voting_intention), but if you download the file from this repository, you won't need to do this.
 2. If polling1922.csv hasn't been updated to the latest poll(s), you can add them yourself to the CSV file using a text editor or spreadsheet software like Excel.
-3. The header row has the column headings \[Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_oth,tpp_lnp,tpp_alp\] which match the Wikipedia table, except I have inserted a new column "last_date", which is the final date where the poll was conducted over a date range. The script uses the last_date to plot the survey, so if you are adding a new poll, put the end date of the range in the second column. Date (the date range) and Firm (company doing the poll) are not used, but are included in case you wish to do further analysis using this data.
+3. The header row has the column headings \[Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp\] which match the Wikipedia table, except I have inserted a new column "last_date", which is the final date where the poll was conducted over a date range. The script uses the last_date to plot the survey, so if you are adding a new poll, put the end date of the range in the second column. Date (the date range) and Firm (company doing the poll) are not used, but are included in case you wish to do further analysis using this data.
 
 ## Generating the charts
 1. Open RStudio, and click on the Packages tab or go to Tools > Install Packages...
@@ -19,4 +19,3 @@ The script is written in the R programming language. To generate the charts, you
 4. Select all the code in polling-graph.r and press the Run button.
 5. The primary vote and two-party-preferred charts will generate in the Plots tab. You can export these to your desired size by pressing Export > Save as image... The PNG export in RStudio isn't great, and vector images are generally preferred on Wikimedia Commons, so export as a 1200 x 800 SVG image.
 6. Upload the resulting SVG or PNG image files to Wikimedia Commons
-7. 

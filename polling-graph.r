@@ -40,8 +40,8 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=pv_uap, colour="UAP"), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_oth), colour="gray60", size=2, alpha = 3/10) +
   geom_smooth(aes(y=pv_oth, colour="OTH"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+  scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL, expand = c(0, 0)) +
   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 

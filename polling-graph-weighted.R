@@ -33,17 +33,17 @@ minss <- min(polling1922$sample_size)
 primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=pv_lnp, size=sample_size), colour="blue4", alpha = 3/10) +
-  geom_smooth(aes(y=pv_lnp, colour="LNP", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=pv_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_alp, size=sample_size), colour="red3", alpha = 3/10) +
-  geom_smooth(aes(y=pv_alp, colour="ALP", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=pv_alp, colour="ALP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_grn, size=sample_size), colour="green4", alpha = 3/10) +
-  geom_smooth(aes(y=pv_grn, colour="GRN", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=pv_grn, colour="GRN", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_onp, size=sample_size), colour="orange3", alpha = 5/10) +
-  geom_smooth(aes(y=pv_onp, colour="ONP", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=pv_onp, colour="ONP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_uap, size=sample_size), colour="yellow3", alpha = 5/10) +
-  geom_smooth(aes(y=pv_uap, colour="UAP", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=pv_uap, colour="UAP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_oth, size=sample_size), colour="gray60", alpha = 3/10) +
-  geom_smooth(aes(y=pv_oth, colour="OTH", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=pv_oth, colour="OTH", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
   scale_size_continuous(name = "Sample size:") +
@@ -58,9 +58,9 @@ primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legen
 tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=tpp_lnp, size=sample_size), colour="blue4", alpha = 3/10) +
-  geom_smooth(aes(y=tpp_lnp, colour="LNP", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=tpp_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=tpp_alp, size=sample_size), colour="red3", alpha = 3/10) +
-  geom_smooth(aes(y=tpp_alp, colour="ALP", weight=sample_size), span = spansize, se = FALSE) +
+  geom_smooth(aes(y=tpp_alp, colour="ALP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(40, 60), breaks=c(42, 44, 46, 48, 50, 52, 54, 56, 58, 60), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
   scale_size_continuous(name = "Sample size:") +

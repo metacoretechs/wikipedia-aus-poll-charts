@@ -1,5 +1,6 @@
 Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp
-20–23 Apr 2022,23 Apr 2022,Ipsos,2302,34.6,37,13,4.3,3.3,45,55
+20–23 Apr 2022,23 Apr 2022,Newspoll,1538,36,37,11,3,4,9,47,53
+20–23 Apr 2022,23 Apr 2022,Ipsos,2302,34.6,37,13,4.3,3.3,7.8,45,55
 14–17 Apr 2022,17 Apr 2022,Newspoll,1510,35,36,12,4,4,9,47,53
 11–17 Apr 2022,17 Apr 2022,Morgan,1382,35.5,35,14,4.5,1.5,9.5,45,55
 11–16 Apr 2022,16 Apr 2022,Resolve,1404,35,34,11,4,4,13,,

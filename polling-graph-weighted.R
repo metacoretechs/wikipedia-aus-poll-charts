@@ -53,7 +53,8 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
                      labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "United Australia", "Other"), 
                      values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "UAP"="yellow3", "OTH"="gray60"))
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
-  guides(colour = guide_legend(order=1), size = guide_legend(order=2))
+  guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
+  scale_size_area()
 
 tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
@@ -70,7 +71,8 @@ tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
                      labels = c("Australian Labor Party", "Liberal-National Coalition"), 
                      values = c("ALP"="red3", "LNP"="blue4"))
 tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
-  guides(colour = guide_legend(order=1), size = guide_legend(order=2))
+  guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
+  scale_size_area()
 
 ppm <- ggplot(ppm1922, aes(x=as.Date(date, '%d-%b-%y'))) +
   theme_bw() +

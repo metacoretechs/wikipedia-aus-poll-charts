@@ -5,11 +5,12 @@ polling1922 <- read.csv("polling1922.csv")
 ppm1922 <- read.csv("ppm1922.csv")
 albosat <- read.csv("albanese_sat1922.csv")
 scomosat <- read.csv("morrison_sat1922.csv")
-essential <- read.csv("essential_polling1922.csv")
+essential_raw <- read.csv("essential_polling1922.csv")
 spansize <- 0.4
 
 # Process Essential undecided to allocate on % vote ratio, join to other table
-essential <- essential %>%
+essential <- essential_raw %>%
+  rowwise() %>%
   mutate(pv_total = sum(pv_lnp_raw, pv_alp_raw, pv_grn_raw, pv_onp_raw, pv_uap_raw, pv_oth_raw, na.rm = TRUE),
          tpp_total = tpp_lnp_raw + tpp_alp_raw,
          pv_lnp = pv_lnp_raw+(undec*pv_lnp_raw/pv_total),
@@ -19,7 +20,7 @@ essential <- essential %>%
          pv_uap = pv_uap_raw+(undec*pv_uap_raw/pv_total),
          pv_oth = pv_oth_raw+(undec*pv_oth_raw/pv_total),
          tpp_lnp = tpp_lnp_raw+(undec*tpp_lnp_raw/tpp_total),
-         tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) %>%
+         tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) #%>%
   select(Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp)
 
 essential$sample_size[is.na(essential$sample_size)] <- round(mean(essential$sample_size, na.rm=TRUE))

@@ -12,8 +12,8 @@ elec2022 <- ymd('2022-05-21')
 pp2010 <- read.csv("https://www.aec.gov.au/Elections/Federal_Elections/2010/files/e2010-prepoll-stats-19-08.csv")
 pp2013 <- read.csv("https://www.aec.gov.au/Elections/Federal_Elections/2013/files/statistics/e2013-prepoll-stats-07-09.csv")
 pp2016 <- read.csv("https://www.aec.gov.au/Elections/Federal_Elections/2016/files/20160702_WEB_Prepoll_Report.csv")
-pp2019 <- read.csv("https://www.aec.gov.au/election/files/downloads/20190518_WEB_Pre-poll_Report_FE2019.csv")
-pp2022 <- 
+pp2019 <- read.csv("https://www.aec.gov.au/Elections/federal_elections/2019/files/downloads/20190518_WEB_Pre-poll_Report_FE2019.csv")
+pp2022 <- read.csv("https://www.aec.gov.au/election/files/downloads/20220514_WEB_Pre-poll_report_FE2022.csv")
 pp2010[is.na(pp2010)] <- 0
 pp2013[is.na(pp2013)] <- 0
 pp2016[is.na(pp2016)] <- 0
@@ -117,10 +117,8 @@ dates22 <- names(pp2022)
 dates22 <- dates22[5:length(dates22)]
 
 tidy22 <- pp2022 %>%
-  gather(dates22, key = "date", value = "votes")
-
-tidy22$date <- substring(tidy22$date,2,20)
-tidy22$date <- dmy(tidy22$date)
+  mutate(date = dmy(Issue.Date)) %>%
+  mutate(votes = Total.Votes)
 
 totals22 <- tidy22 %>%
   group_by(date) %>%
@@ -132,7 +130,9 @@ totals22 <- tidy22 %>%
 
 totals22 <- totals22[,-2]
 totals22[is.na(totals22)] <- 0
-totals22 <- mutate(totals22, totals = cumsum(votesperday))
+daysleft <- as.integer(difftime(Sys.Date(), elec2022, units = "days"))
+totals22 <- mutate(totals22, totals = cumsum(votesperday)) %>%
+  filter(daysuntil < daysleft)
 
 enrol <- read.csv("elector-count-fe-tidy-2022.csv")
 tidyenrol <- gather(enrol, "age", "enrolled", 4:16)

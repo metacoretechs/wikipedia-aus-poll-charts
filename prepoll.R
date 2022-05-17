@@ -13,7 +13,7 @@ pp2010 <- read.csv("https://www.aec.gov.au/Elections/Federal_Elections/2010/file
 pp2013 <- read.csv("https://www.aec.gov.au/Elections/Federal_Elections/2013/files/statistics/e2013-prepoll-stats-07-09.csv")
 pp2016 <- read.csv("https://www.aec.gov.au/Elections/Federal_Elections/2016/files/20160702_WEB_Prepoll_Report.csv")
 pp2019 <- read.csv("https://www.aec.gov.au/Elections/federal_elections/2019/files/downloads/20190518_WEB_Pre-poll_Report_FE2019.csv")
-pp2022 <- read.csv("https://www.aec.gov.au/election/files/downloads/20220514_WEB_Pre-poll_report_FE2022.csv")
+pp2022 <- read.csv("https://www.aec.gov.au/election/files/downloads/20220517_WEB_Pre-poll_report_FE2022.csv")
 pp2010[is.na(pp2010)] <- 0
 pp2013[is.na(pp2013)] <- 0
 pp2016[is.na(pp2016)] <- 0

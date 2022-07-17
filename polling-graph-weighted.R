@@ -8,6 +8,15 @@ scomosat <- read.csv("morrison_sat1922.csv")
 essential_raw <- read.csv("essential_polling1922.csv")
 spansize <- 0.4
 
+election19 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(41.44,33.34,10.4,3.08,3.43,8.3))
+election22 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(35.7,32.58,12.25,4.96,4.12,10.38))
+election19tpp <- data.frame(c("LNP","ALP"), c(51.53,48.47))
+election22tpp <- data.frame(c("LNP","ALP"), c(47.87,52.13))
+names(election19) <- c("party", "vote")
+names(election22) <- c("party", "vote")
+names(election19tpp) <- c("party", "vote")
+names(election22tpp) <- c("party", "vote")
+
 # Process Essential undecided to allocate on % vote ratio, join to other table
 essential <- essential_raw %>%
   rowwise() %>%
@@ -45,14 +54,20 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=pv_uap, colour="UAP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_oth, size=sample_size), colour="gray60", alpha = 3/10) +
   geom_smooth(aes(y=pv_oth, colour="OTH", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+  geom_point(data = election19, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  geom_point(data = election19, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
+  scale_x_date(limits=c(as.Date('2019-05-18', '%Y-%m-%d'), as.Date('2022-05-21', '%Y-%m-%d')), date_breaks = "3 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   scale_size_continuous(name = "Sample size:") +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+  guides(colour = guide_legend(override.aes = list(alpha = 1, shape = 16, size = 3))) +
+  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
                      labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "United Australia", "Other"), 
                      values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "UAP"="yellow3", "OTH"="gray60"))
+
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
   guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
   scale_size_area()
@@ -63,10 +78,14 @@ tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=tpp_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=tpp_alp, size=sample_size), colour="red3", alpha = 3/10) +
   geom_smooth(aes(y=tpp_alp, colour="ALP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
+  geom_point(data = election19tpp, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  geom_point(data = election19tpp, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  geom_point(data = election22tpp, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  geom_point(data = election22tpp, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(40, 60), breaks=c(42, 44, 46, 48, 50, 52, 54, 56, 58, 60), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+  scale_x_date(limits=c(as.Date('2019-05-18', '%Y-%m-%d'), as.Date('2022-05-21', '%Y-%m-%d')), date_breaks = "3 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   scale_size_continuous(name = "Sample size:") +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
                      labels = c("Australian Labor Party", "Liberal-National Coalition"), 

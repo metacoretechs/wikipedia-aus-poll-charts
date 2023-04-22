@@ -1,21 +1,22 @@
 library(ggplot2)
 library(dplyr)
+library(lubridate)
 setwd("~/Documents/GitHub/wikipedia-aus-poll-charts") # replace with your own working directory
-polling1922 <- read.csv("polling1922.csv")
-ppm1922 <- read.csv("ppm1922.csv")
-albosat <- read.csv("albanese_sat1922.csv")
-scomosat <- read.csv("morrison_sat1922.csv")
-essential_raw <- read.csv("essential_polling1922.csv")
-spansize <- 0.4
+polling2225 <- read.csv("polling2225.csv")
+ppm1922 <- read.csv("ppm2225.csv")
+#albosat <- read.csv("albanese_sat2225.csv")
+#scomosat <- read.csv("dutton_sat2225.csv")
+essential_raw <- read.csv("essential_polling2225.csv")
+spansize <- 0.5
 
-election19 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(41.44,33.34,10.4,3.08,3.43,8.3))
-election22 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(35.7,32.58,12.25,4.96,4.12,10.38))
-election19tpp <- data.frame(c("LNP","ALP"), c(51.53,48.47))
-election22tpp <- data.frame(c("LNP","ALP"), c(47.87,52.13))
-names(election19) <- c("party", "vote")
+election22 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(35.7,32.6,12.2,5.0,4.1,10.4))
+#election25 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c())
+election22tpp <- data.frame(c("LNP","ALP"), c(47.9,52.1))
+#election25tpp <- data.frame(c("LNP","ALP"), c())
 names(election22) <- c("party", "vote")
-names(election19tpp) <- c("party", "vote")
+#names(election25) <- c("party", "vote")
 names(election22tpp) <- c("party", "vote")
+#names(election25tpp) <- c("party", "vote")
 
 # Process Essential undecided to allocate on % vote ratio, join to other table
 essential <- essential_raw %>%
@@ -32,15 +33,17 @@ essential <- essential_raw %>%
          tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) #%>%
   select(Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp)
 
+polling2225$sample_size[is.na(polling2225$sample_size)] <- round(mean(polling2225$sample_size, na.rm=TRUE))
 essential$sample_size[is.na(essential$sample_size)] <- round(mean(essential$sample_size, na.rm=TRUE))
 
-polling1922 <- polling1922 %>%
+polling2225 <- polling2225 %>%
   bind_rows(essential) %>%
   arrange(desc(as.Date(last_date, '%d %b %Y')))
 
-minss <- min(polling1922$sample_size)
+minss <- min(polling2225$sample_size)
+max_date <- max(as.Date(polling2225$last_date, '%d %b %Y')) + days(7)
 
-primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
+primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=pv_lnp, size=sample_size), colour="blue4", alpha = 3/10) +
   geom_smooth(aes(y=pv_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
@@ -54,15 +57,15 @@ primary_votes <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=pv_uap, colour="UAP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_oth, size=sample_size), colour="gray60", alpha = 3/10) +
   geom_smooth(aes(y=pv_oth, colour="OTH", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
-  geom_point(data = election19, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
-  geom_point(data = election19, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
   geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  #geom_point(data = election25, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  #geom_point(data = election22, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(limits=c(as.Date('2019-05-18', '%Y-%m-%d'), as.Date('2022-05-21', '%Y-%m-%d')), date_breaks = "3 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
+  scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   scale_size_continuous(name = "Sample size:") +
   guides(colour = guide_legend(override.aes = list(alpha = 1, shape = 16, size = 3))) +
-  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(size=12)) +
+  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
                      labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "United Australia", "Other"), 
@@ -72,18 +75,18 @@ primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legen
   guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
   scale_size_area()
 
-tpp <- ggplot(polling1922, aes(x=as.Date(last_date, '%d %b %Y'))) +
+tpp <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
   geom_point(aes(y=tpp_lnp, size=sample_size), colour="blue4", alpha = 3/10) +
   geom_smooth(aes(y=tpp_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=tpp_alp, size=sample_size), colour="red3", alpha = 3/10) +
   geom_smooth(aes(y=tpp_alp, colour="ALP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
-  geom_point(data = election19tpp, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
-  geom_point(data = election19tpp, aes(x = as.Date('2019-05-18', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   geom_point(data = election22tpp, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
   geom_point(data = election22tpp, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
-  scale_y_continuous(limits=c(40, 60), breaks=c(42, 44, 46, 48, 50, 52, 54, 56, 58, 60), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(limits=c(as.Date('2019-05-18', '%Y-%m-%d'), as.Date('2022-05-21', '%Y-%m-%d')), date_breaks = "3 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
+  #geom_point(data = election25tpp, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  #geom_point(data = election25tpp, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  scale_y_continuous(limits=c(35, 65), breaks=c(40,45,50,55,60), minor_breaks = NULL, expand = c(0,0)) +
+  scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   scale_size_continuous(name = "Sample size:") +
   theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(size=12)) +
   labs(y="Voters (%)", x= NULL) +
@@ -94,53 +97,53 @@ tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = e
   guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
   scale_size_area()
 
-ppm <- ggplot(ppm1922, aes(x=as.Date(date, '%d-%b-%y'))) +
-  theme_bw() +
-  geom_point(aes(y=morrison), colour="blue4", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=morrison, colour="Morrison"), span = spansize, se = FALSE) +
-  geom_point(aes(y=albanese), colour="red3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=albanese, colour="Albanese"), span = spansize, se = FALSE) +
-  geom_point(aes(y=unknown), colour="grey20", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 70), breaks = c(10, 20, 30, 40, 50, 60), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
-  labs(y="Support (%)", x= NULL) +
-  scale_colour_manual(name="", 
-                     labels = c("Morrison", "Albanese", "Don't Know"), 
-                     values = c("Morrison"="blue4", "Albanese"="red3", "Don't Know" = "grey60"))
-ppm + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
-
-lnp_sat <- ggplot(scomosat, aes(x=as.Date(date, '%d-%b-%y'))) +
-  theme_bw() +
-  geom_point(aes(y=satisfied), colour="#02e03d", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=satisfied, colour="Satisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=dissatisfied), colour="#f74888", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=dissatisfied, colour="Dissatisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
-  labs(y="% satisfaction", x= NULL, title = "Scott Morrison approval rating") +
-  scale_colour_manual(name="", 
-                     labels = c("Satisfied", "Dissatisfied", "Don't Know"), 
-                     values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
-lnp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
-
-alp_sat <- ggplot(albosat, aes(x=as.Date(date, '%d-%b-%y'))) +
-  theme_bw() +
-  geom_point(aes(y=satisfied), colour="#02e03d", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=satisfied, colour="Satisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=dissatisfied), colour="#f74888", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=dissatisfied, colour="Dissatisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
-  labs(y="% satisfaction", x= NULL, title = "Anthony Albanese approval rating") +
-  scale_colour_manual(name="", 
-                      labels = c("Satisfied", "Dissatisfied", "Don't Know"), 
-                      values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
-alp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
+# ppm <- ggplot(ppm1922, aes(x=as.Date(date, '%d-%b-%y'))) +
+#   theme_bw() +
+#   geom_point(aes(y=morrison), colour="blue4", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=morrison, colour="Morrison"), span = spansize, se = FALSE) +
+#   geom_point(aes(y=albanese), colour="red3", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=albanese, colour="Albanese"), span = spansize, se = FALSE) +
+#   geom_point(aes(y=unknown), colour="grey20", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
+#   scale_y_continuous(limits=c(0, 70), breaks = c(10, 20, 30, 40, 50, 60), minor_breaks = NULL, expand = c(0,0)) +
+#   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+#   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+#   labs(y="Support (%)", x= NULL) +
+#   scale_colour_manual(name="", 
+#                      labels = c("Dutton", "Albanese", "Don't Know"), 
+#                      values = c("Dutton"="blue4", "Albanese"="red3", "Don't Know" = "grey60"))
+# ppm + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
+# 
+# lnp_sat <- ggplot(scomosat, aes(x=as.Date(date, '%d-%b-%y'))) +
+#   theme_bw() +
+#   geom_point(aes(y=satisfied), colour="#02e03d", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=satisfied, colour="Satisfied"), span = spansize, se = FALSE) +
+#   geom_point(aes(y=dissatisfied), colour="#f74888", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=dissatisfied, colour="Dissatisfied"), span = spansize, se = FALSE) +
+#   geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
+#   scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
+#   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+#   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+#   labs(y="% satisfaction", x= NULL, title = "Peter Dutton approval rating") +
+#   scale_colour_manual(name="", 
+#                      labels = c("Satisfied", "Dissatisfied", "Don't Know"), 
+#                      values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
+# lnp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
+# 
+# alp_sat <- ggplot(albosat, aes(x=as.Date(date, '%d-%b-%y'))) +
+#   theme_bw() +
+#   geom_point(aes(y=satisfied), colour="#02e03d", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=satisfied, colour="Satisfied"), span = spansize, se = FALSE) +
+#   geom_point(aes(y=dissatisfied), colour="#f74888", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=dissatisfied, colour="Dissatisfied"), span = spansize, se = FALSE) +
+#   geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
+#   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
+#   scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
+#   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+#   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+#   labs(y="% satisfaction", x= NULL, title = "Anthony Albanese approval rating") +
+#   scale_colour_manual(name="", 
+#                       labels = c("Satisfied", "Dissatisfied", "Don't Know"), 
+#                       values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
+# alp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))

@@ -30,7 +30,7 @@ essential <- essential_raw %>%
          pv_uap = pv_uap_raw+(undec*pv_uap_raw/pv_total),
          pv_oth = pv_oth_raw+(undec*pv_oth_raw/pv_total),
          tpp_lnp = tpp_lnp_raw+(undec*tpp_lnp_raw/tpp_total),
-         tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) #%>%
+         tpp_alp = tpp_alp_raw+(undec*tpp_alp_raw/tpp_total)) %>%
   select(Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp)
 
 polling2225$sample_size[is.na(polling2225$sample_size)] <- round(mean(polling2225$sample_size, na.rm=TRUE))
@@ -63,7 +63,6 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   #geom_point(data = election22, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
-  scale_size_continuous(name = "Sample size:") +
   guides(colour = guide_legend(override.aes = list(alpha = 1, shape = 16, size = 3))) +
   theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
@@ -72,8 +71,8 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
                      values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "UAP"="yellow3", "OTH"="gray60"))
 
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
-  guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
-  scale_size_area()
+  guides(colour = guide_legend(order=1, override.aes = list(size = 0, shape = 15)), size = guide_legend(order=2)) +
+  scale_size_area(name = "Sample size:")
 
 tpp <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
@@ -87,15 +86,14 @@ tpp <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   #geom_point(data = election25tpp, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(35, 65), breaks=c(40,45,50,55,60), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
-  scale_size_continuous(name = "Sample size:") +
-  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(size=12)) +
+  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
                      labels = c("Australian Labor Party", "Liberal-National Coalition"), 
                      values = c("ALP"="red3", "LNP"="blue4"))
 tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
-  guides(colour = guide_legend(order=1), size = guide_legend(order=2)) +
-  scale_size_area()
+  guides(colour = guide_legend(order=1, override.aes = list(size = 0, shape = 15)), size = guide_legend(order=2)) +
+  scale_size_area(name = "Sample size:")
 
 # ppm <- ggplot(ppm1922, aes(x=as.Date(date, '%d-%b-%y'))) +
 #   theme_bw() +

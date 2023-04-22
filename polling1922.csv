@@ -1,5 +1,8 @@
 Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp
+<<<<<<< Updated upstream
 13–19 May 2022,19 May 2022,Newspoll,35,36,12,5,3,9,47,53
+=======
+>>>>>>> Stashed changes
 15–18 May 2022,18 May 2022,Ipsos,1996,35,36,13,5,3,8,47,53
 12–17 May 2022,17 May 2022,Resolve,2049,34,31,14,6,4,10,49,51
 9–15 May 2022,15 May 2022,Morgan,1366,34,34,13,4,1,14,47,53

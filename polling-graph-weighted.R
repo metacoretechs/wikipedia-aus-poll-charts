@@ -45,10 +45,10 @@ max_date <- max(as.Date(polling2225$last_date, '%d %b %Y')) + days(7)
 
 primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
-  geom_point(aes(y=pv_lnp, size=sample_size), colour="blue4", alpha = 3/10) +
-  geom_smooth(aes(y=pv_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_alp, size=sample_size), colour="red3", alpha = 3/10) +
   geom_smooth(aes(y=pv_alp, colour="ALP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
+  geom_point(aes(y=pv_lnp, size=sample_size), colour="blue4", alpha = 3/10) +
+  geom_smooth(aes(y=pv_lnp, colour="LNP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_grn, size=sample_size), colour="green4", alpha = 3/10) +
   geom_smooth(aes(y=pv_grn, colour="GRN", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(aes(y=pv_onp, size=sample_size), colour="orange3", alpha = 5/10) +
@@ -67,8 +67,8 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
-                     labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "United Australia", "Other"), 
-                     values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "UAP"="yellow3", "OTH"="gray60"))
+                     labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "Other", "United Australia"), 
+                     values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "OTH"="gray60", "UAP"="yellow3"))
 
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
   guides(colour = guide_legend(order=1, override.aes = list(size = 0, shape = 15)), size = guide_legend(order=2)) +

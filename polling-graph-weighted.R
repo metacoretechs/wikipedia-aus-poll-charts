@@ -125,6 +125,7 @@ alp_sat <- ggplot(albosat, aes(x=as.Date(date, '%d-%b-%y'))) +
   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="% satisfaction", x= NULL, title = "Anthony Albanese approval rating") +
   scale_colour_manual(name="",
+                      breaks = c("Satisfied", "Dissatisfied", "Don't Know"),
                       labels = c("Satisfied", "Dissatisfied", "Don't Know"),
                       values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
 alp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
@@ -142,6 +143,7 @@ lnp_sat <- ggplot(duttonsat, aes(x=as.Date(date, '%d-%b-%y'))) +
   theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="% satisfaction", x= NULL, title = "Peter Dutton approval rating") +
   scale_colour_manual(name="",
+                      breaks = c("Satisfied", "Dissatisfied", "Don't Know"),
                      labels = c("Satisfied", "Dissatisfied", "Don't Know"),
                      values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
 lnp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))

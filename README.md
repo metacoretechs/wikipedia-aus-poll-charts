@@ -1,5 +1,5 @@
 # wikipedia-aus-poll-charts
-Political polling data and R code to generate charts for Wikipedia articles such as Next Australian federal election
+Political polling data and R code to generate charts for Wikipedia articles such as [Opinion polling for the next Australian federal election](https://en.wikipedia.org/wiki/Opinion_polling_for_the_next_Australian_federal_election).
 
 ## Installing R
 The script is written in the R programming language. To generate the charts, you will need to have access to an R interpreter. I recommend you use the R integrated development environment RStudio.

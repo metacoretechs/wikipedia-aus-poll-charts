@@ -147,3 +147,4 @@ lnp_sat <- ggplot(duttonsat, aes(x=as.Date(date, '%d-%b-%y'))) +
                      labels = c("Satisfied", "Dissatisfied", "Don't Know"),
                      values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
 lnp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
+

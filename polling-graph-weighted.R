@@ -60,7 +60,7 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
   geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   #geom_point(data = election25, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
-  #geom_point(data = election22, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  #geom_point(data = election25, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   guides(colour = guide_legend(override.aes = list(alpha = 1, shape = 16, size = 3))) +
@@ -147,4 +147,3 @@ lnp_sat <- ggplot(duttonsat, aes(x=as.Date(date, '%d-%b-%y'))) +
                      labels = c("Satisfied", "Dissatisfied", "Don't Know"),
                      values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
 lnp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
-

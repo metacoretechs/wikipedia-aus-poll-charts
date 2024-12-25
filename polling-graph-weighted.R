@@ -7,7 +7,7 @@ ppm2225 <- read.csv("ppm2225.csv")
 albosat <- read.csv("albanese_sat2225.csv")
 duttonsat <- read.csv("dutton_sat2225.csv")
 essential_raw <- read.csv("essential_polling2225.csv")
-spansize <- 0.5
+spansize <- 0.2
 
 election22 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(35.7,32.6,12.2,5.0,4.1,10.4))
 #election25 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c())

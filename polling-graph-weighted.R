@@ -67,7 +67,7 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
-                     labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "Other", "United Australia"), 
+                     labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "Other", "Trumpet of Patriots"), 
                      values = c("ALP"="red3", "GRN"="green4", "LNP"="blue4", "ONP"="orange3", "OTH"="gray60", "UAP"="yellow3"))
 
 primary_votes + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +

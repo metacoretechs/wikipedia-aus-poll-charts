@@ -3,7 +3,7 @@ Political polling data and R code to generate charts for Wikipedia articles such
 
 The data is sourced from, and should reflect, the polling data tables in the Wikipedia article [Opinion polling for the 2025 Australian federal election](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2025_Australian_federal_election).
 
-Source: Wikipedia contributors. Opinion polling for the 2025 Australian federal election. Wikipedia, The Free Encyclopedia. March 24, 2025, 10:55 UTC. Available at: https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_2025_Australian_federal_election&oldid=1282106837. Accessed March 24, 2025.
+Source: Wikipedia contributors. Opinion polling for the 2025 Australian federal election. Wikipedia, The Free Encyclopedia. March 28, 2025, 13:32 UTC. Available at: https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_2025_Australian_federal_election&oldid=1282764847. Accessed March 29, 2025.
 
 ## Installing R
 The script is written in the R programming language. To generate the charts, you will need to have access to an R interpreter. I recommend you use the R integrated development environment RStudio.

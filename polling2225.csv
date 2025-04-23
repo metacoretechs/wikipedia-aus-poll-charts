@@ -1,4 +1,5 @@
 Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_alp,tpp_lnp
+14–20 Apr 2025,20 Apr 2025,Morgan,1605,34,34.5,14.5,6,0.5,11,55.5,44.5
 14–17 Apr 2025,17 Apr 2025,Newspoll,1263,35,34,12,7,,12,52,48
 14–16 Apr 2025,16 Apr 2025,Freshwater,1062,39,32,12,,,17,50,50
 11–15 Apr 2025,15 Apr 2025,YouGov,1506,33,33,13,7,2,12,53,47
@@ -79,7 +80,6 @@ Date,last_date,Firm,sample_size,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_al
 3–7 Sep 2024,7 Sep 2024,Resolve,1614,37,28,13,6,1,15,50,50
 26 Aug – 1 Sep 2024,1 Sep 2024,Morgan,1697,36,30.5,13,6,,14.5,50.5,49.5
 26–30 Aug 2024,30 Aug 2024,Newspoll,1263,38,32,12,7,,11,50,50
-6–29 Aug 2024,29 Aug 2024,Wolf&Smith,10239,36,29,13,6,,15,51,49
 23–28 Aug 2024,28 Aug 2024,YouGov,1543,37,32,13,8,,10,50,50
 10 Jul – 27 Aug 2024,27 Aug 2024,RedBridge,5967,38,32,12,,,18,50,50
 19–25 Aug 2024,25 Aug 2024,Morgan,1701,39.5,29.5,13,4,,14,49.5,50.5

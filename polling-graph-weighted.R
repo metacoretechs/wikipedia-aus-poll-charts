@@ -64,7 +64,7 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   guides(colour = guide_legend(override.aes = list(alpha = 1, shape = 16, size = 3))) +
-  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
+  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=90, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
                      labels = c("Labor", "Greens", "Liberal-National Coalition", "One Nation", "Other", "Trumpet of Patriots"), 
@@ -86,7 +86,7 @@ tpp <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   #geom_point(data = election25tpp, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(35, 65), breaks=c(40,45,50,55,60), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
-  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=45, vjust=0.5, size=12)) +
+  theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=90, vjust=0.5, size=12)) +
   labs(y="Voters (%)", x= NULL) +
   scale_colour_manual(name="", 
                      labels = c("Australian Labor Party", "Liberal-National Coalition"), 
@@ -105,7 +105,7 @@ ppm <- ggplot(ppm2225, aes(x=as.Date(date, '%d-%b-%y'))) +
   geom_smooth(aes(y=unknown, colour="Unknown"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(10, 20, 30, 40, 50, 60), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+  theme(axis.text.x = element_text(angle=90, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="Support (%)", x= NULL) +
   scale_colour_manual(name="",
                      labels = c("Albanese", "Dutton", "Don't Know"),
@@ -122,7 +122,7 @@ alp_sat <- ggplot(albosat, aes(x=as.Date(date, '%d-%b-%y'))) +
   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+  theme(axis.text.x = element_text(angle=90, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="% satisfaction", x= NULL, title = "Anthony Albanese approval rating") +
   scale_colour_manual(name="",
                       breaks = c("Satisfied", "Dissatisfied", "Don't Know"),
@@ -140,7 +140,7 @@ lnp_sat <- ggplot(duttonsat, aes(x=as.Date(date, '%d-%b-%y'))) +
   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
+  theme(axis.text.x = element_text(angle=90, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="% satisfaction", x= NULL, title = "Peter Dutton approval rating") +
   scale_colour_manual(name="",
                       breaks = c("Satisfied", "Dissatisfied", "Don't Know"),

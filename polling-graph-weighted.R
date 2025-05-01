@@ -104,7 +104,7 @@ ppm <- ggplot(ppm2225, aes(x=as.Date(date, '%d-%b-%y'))) +
   geom_point(aes(y=unknown), colour="grey20", size=2.5, alpha = 3/10) +
   geom_smooth(aes(y=unknown, colour="Unknown"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(10, 20, 30, 40, 50, 60), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL, expand = c(0.01,0.01)) +
   theme(axis.text.x = element_text(angle=90, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="Support (%)", x= NULL) +
   scale_colour_manual(name="",
@@ -121,7 +121,7 @@ alp_sat <- ggplot(albosat, aes(x=as.Date(date, '%d-%b-%y'))) +
   geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL, expand = c(0.01,0.01)) +
   theme(axis.text.x = element_text(angle=90, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="% satisfaction", x= NULL, title = "Anthony Albanese approval rating") +
   scale_colour_manual(name="",
@@ -139,7 +139,7 @@ lnp_sat <- ggplot(duttonsat, aes(x=as.Date(date, '%d-%b-%y'))) +
   geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
   geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL, expand = c(0.01,0.01)) +
   theme(axis.text.x = element_text(angle=90, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
   labs(y="% satisfaction", x= NULL, title = "Peter Dutton approval rating") +
   scale_colour_manual(name="",

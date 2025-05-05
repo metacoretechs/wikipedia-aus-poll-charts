@@ -10,13 +10,13 @@ essential_raw <- read.csv("essential_polling2225.csv")
 spansize <- 0.2
 
 election22 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(35.7,32.6,12.2,5.0,4.1,10.4))
-#election25 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c())
+election25 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(32.1,34.8,11.8,6.2,1.8,13.3))
 election22tpp <- data.frame(c("LNP","ALP"), c(47.9,52.1))
-#election25tpp <- data.frame(c("LNP","ALP"), c())
+election25tpp <- data.frame(c("LNP","ALP"), c(45,55))
 names(election22) <- c("party", "vote")
-#names(election25) <- c("party", "vote")
+names(election25) <- c("party", "vote")
 names(election22tpp) <- c("party", "vote")
-#names(election25tpp) <- c("party", "vote")
+names(election25tpp) <- c("party", "vote")
 
 # Process Essential undecided to allocate on % vote ratio, join to other table
 essential <- essential_raw %>%
@@ -41,7 +41,8 @@ polling2225 <- polling2225 %>%
   arrange(desc(as.Date(last_date, '%d %b %Y')))
 
 minss <- min(polling2225$sample_size)
-max_date <- max(as.Date(polling2225$last_date, '%d %b %Y')) + days(7)
+#max_date <- max(as.Date(polling2225$last_date, '%d %b %Y')) + days(7)
+max_date <- as.Date('2025-05-03')
 
 primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   theme_bw() +
@@ -59,8 +60,8 @@ primary_votes <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=pv_oth, colour="OTH", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
   geom_point(data = election22, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
-  #geom_point(data = election25, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
-  #geom_point(data = election25, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  geom_point(data = election25, aes(x = as.Date('2025-05-03', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  geom_point(data = election25, aes(x = as.Date('2025-05-03', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(0, 50), breaks=c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   guides(colour = guide_legend(override.aes = list(alpha = 1, shape = 16, size = 3))) +
@@ -82,8 +83,8 @@ tpp <- ggplot(polling2225, aes(x=as.Date(last_date, '%d %b %Y'))) +
   geom_smooth(aes(y=tpp_alp, colour="ALP", weight=sqrt(sample_size)), span = spansize, se = FALSE) +
   geom_point(data = election22tpp, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
   geom_point(data = election22tpp, aes(x = as.Date('2022-05-21', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
-  #geom_point(data = election25tpp, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
-  #geom_point(data = election25tpp, aes(x = as.Date('2025-05-??', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
+  geom_point(data = election25tpp, aes(x = as.Date('2025-05-03', '%Y-%m-%d'), y = vote, colour = party), shape=23, stroke=0.5, fill = "#FFFFFF", size=4) +
+  geom_point(data = election25tpp, aes(x = as.Date('2025-05-03', '%Y-%m-%d'), y = vote, colour = party), shape=18, size=3) +
   scale_y_continuous(limits=c(35, 65), breaks=c(40,45,50,55,60), minor_breaks = NULL, expand = c(0,0)) +
   scale_x_date(limits=c(as.Date('2022-05-21', '%Y-%m-%d'), max_date), date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = "1 month", expand = c(0,0)) +
   theme(legend.key = element_rect(colour = NA, fill = NA), legend.text=element_text(size=12), axis.text.y = element_text(size=12), axis.text.x = element_text(angle=90, vjust=0.5, size=12)) +

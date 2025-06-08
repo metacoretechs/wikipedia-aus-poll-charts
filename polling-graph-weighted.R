@@ -10,9 +10,9 @@ essential_raw <- read.csv("essential_polling2225.csv")
 spansize <- 0.2
 
 election22 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(35.7,32.6,12.2,5.0,4.1,10.4))
-election25 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(32.1,34.8,11.8,6.2,1.8,13.3))
+election25 <- data.frame(c("LNP","ALP","GRN","ONP","UAP","OTH"), c(31.8,34.6,12.2,6.4,1.9,13.1))
 election22tpp <- data.frame(c("LNP","ALP"), c(47.9,52.1))
-election25tpp <- data.frame(c("LNP","ALP"), c(45,55))
+election25tpp <- data.frame(c("LNP","ALP"), c(44.8,55.2))
 names(election22) <- c("party", "vote")
 names(election25) <- c("party", "vote")
 names(election22tpp) <- c("party", "vote")

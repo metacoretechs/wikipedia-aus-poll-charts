@@ -1,7 +1,7 @@
 # wikipedia-aus-poll-charts
 Political polling data and R code to generate charts for Wikipedia articles such as [Opinion polling for the next Australian federal election](https://en.wikipedia.org/wiki/Opinion_polling_for_the_next_Australian_federal_election).
 
-The data is sourced from, and should reflect, the polling data tables in the Wikipedia article [Opinion polling for the 2025 Australian federal election](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2025_Australian_federal_election).
+The data is sourced from, and should reflect, the polling data tables in the Wikipedia article [Opinion polling for the next Australian federal election](https://en.wikipedia.org/wiki/Opinion_polling_for_the_next_Australian_federal_election).
 
 Wikipedia contributors. Opinion polling for the next Australian federal election. Wikipedia, The Free Encyclopedia. July 2, 2025, 09:46 UTC. Available at: https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_next_Australian_federal_election. Accessed July 2, 2025.
 

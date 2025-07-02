@@ -3,7 +3,7 @@ Political polling data and R code to generate charts for Wikipedia articles such
 
 The data is sourced from, and should reflect, the polling data tables in the Wikipedia article [Opinion polling for the 2025 Australian federal election](https://en.wikipedia.org/wiki/Opinion_polling_for_the_2025_Australian_federal_election).
 
-Source: Wikipedia contributors. Opinion polling for the 2025 Australian federal election. Wikipedia, The Free Encyclopedia. March 28, 2025, 13:32 UTC. Available at: https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_2025_Australian_federal_election&oldid=1282764847. Accessed March 29, 2025.
+Wikipedia contributors. Opinion polling for the next Australian federal election. Wikipedia, The Free Encyclopedia. July 2, 2025, 09:46 UTC. Available at: https://en.wikipedia.org/w/index.php?title=Opinion_polling_for_the_next_Australian_federal_election. Accessed July 2, 2025.
 
 ## Installing R
 The script is written in the R programming language. To generate the charts, you will need to have access to an R interpreter. I recommend you use the R integrated development environment RStudio.
@@ -13,7 +13,7 @@ The script is written in the R programming language. To generate the charts, you
 
 ## Updating the polling data
 1. I originally used [OpenRefine](http://openrefine.org) to clean up the Wikitable of polling data from [the "Next Australian federal election" Wikipedia article](https://en.wikipedia.org/wiki/Next_Australian_federal_election#Voting_intention), but if you download the file from this repository, you won't need to do this.
-2. If polling2225.csv hasn't been updated to the latest poll(s), you can add them yourself to the CSV file using a text editor or spreadsheet software like Excel.
+2. If polling2528.csv hasn't been updated to the latest poll(s), you can add them yourself to the CSV file using a text editor or spreadsheet software like Excel.
 3. The header row has the column headings \[Date,last_date,Firm,pv_lnp,pv_alp,pv_grn,pv_onp,pv_uap,pv_oth,tpp_lnp,tpp_alp\] which match the Wikipedia table, except I have inserted a new column "last_date", which is the final date where the poll was conducted over a date range. The script uses the last_date to plot the survey, so if you are adding a new poll, put the end date of the range in the second column. Date (the date range) and Firm (company doing the poll) are not used, but are included in case you wish to do further analysis using this data.
 4. Polls by Essential Research use a methodology called "2PP+", where the percentage of undecided voters is included. Essential poll data is listed in a separate CSV file (essential_polling1922.csv) which includes a column for the undecided voter percentage. The script will then calculate an estimated primary vote and two-party preferred vote by distributing the undecided figures to the same proportions as the decided figures. This mimics the methodology of the other polls which exclude undecided voters and publish the breakdown of decided voters only.
 5. There is a column of the survey's sample size, which is used in a separate script `polling-graph-weighted.r`. This script uses the sample size to weight the LOESS regression, and displays the dots of the scatterplot by size.

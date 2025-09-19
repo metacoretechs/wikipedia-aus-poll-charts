@@ -7,7 +7,7 @@ ppm2528 <- read.csv("ppm2528.csv")
 albosat <- read.csv("albanese_sat2528.csv")
 leysat <- read.csv("ley_sat2528.csv")
 # essential_raw <- read.csv("essential_polling2528.csv")
-spansize <- 2
+spansize <- 1
 
 election25 <- data.frame(c("ALP","LNP","GRN","ONP","UAP","OTH"), c(31.8,34.6,12.2,6.4,1.9,13.1))
 election25tpp <- data.frame(c("LNP","ALP"), c(44.8,55.2))
